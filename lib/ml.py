@@ -39,9 +39,9 @@ class PartialFitter(BaseEstimator, TransformerMixin):
                         row = self._transform(row)
                         rows.append(row)
                         response.append(row_y)
-                except:
+                except Exception as e:
                     if self.logging:
-                        logging.warning('Row failed: {}'.format([x for x in row]))
+                        logging.exception(e)
                     pass
 
             shuffledRange = range(len(rows))
