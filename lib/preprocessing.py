@@ -48,12 +48,18 @@ def clean_parse_row(row, features=features):
 
 
 def get_int_field(field, path):
-    return (int(row_i[field]) for row_i in DictReader(open(path)))
+    with open(path) as f:
+        for row in DictReader(f):
+            yield (int(row[field]) if row[field] != '' else 0)
 
 
 def data_generator(parser, path, rowfeatures=features):
-    return (parser(x, rowfeatures)
-            for x in DictReader(open(path)))
+    """
+    Needs to return vanilla str, not numpy str to work with hashing
+    """
+    with open(path) as f:
+        for row in DictReader(f):
+            yield (parser(row, rowfeatures))
 
 
 def write_submission(number, ids, preds):
