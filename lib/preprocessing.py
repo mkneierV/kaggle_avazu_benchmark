@@ -38,11 +38,11 @@ def clean_parse_row(row, features=features):
     _clean_row(row)
 
     for k in features:
-        yield (row[k], 1.0)
+        yield (':'.join((k, row[k])), 1.0)
         
         for j in features:
             if k != j:
-                yield (_make_interact([row[k],row[j]]), 1.0)
+                yield (_make_interact([k, j, row[k],row[j]]), 1.0)
 
     yield (_make_interact([row['app_category'], row['site_category'], row['banner_pos']]), 1.0)
 
