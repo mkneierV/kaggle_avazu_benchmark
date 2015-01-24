@@ -67,5 +67,5 @@ def write_submission(number, ids, preds):
         f.write('id,click\n')
         for id_, prob in zip(ids, preds):
             f.write('%s,%f\n' % (id_, prob))
-    f.close()
+ 
 

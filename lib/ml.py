@@ -42,7 +42,6 @@ class PartialFitter(BaseEstimator, TransformerMixin):
                 except Exception as e:
                     if self.logging:
                         logging.exception(e)
-                    pass
 
             shuffledRange = range(len(rows))
             # need to shuffle data during each iteration
@@ -89,7 +88,7 @@ def llfun(act, pred):
 
 
 def _make_scorer(score_function):
-    return make_scorer(llfun,
+    return make_scorer(score_function,
                        greater_is_better=False,
                        needs_proba=True)
 
